@@ -1,0 +1,2 @@
+# This file ensures the deployments directory is tracked by Git
+# Deployment artifacts (JSON files) will be saved here after contract deployment

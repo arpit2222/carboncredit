@@ -1,0 +1,49 @@
+{
+    "name": "carbon-credit-vechain",
+    "version": "1.0.0",
+    "description": "Blockchain-based carbon credit tracking system built on VeChain for the VeChain Builders Hackathon",
+    "main": "index.js",
+    "scripts": {
+      "compile": "npx hardhat compile",
+      "test": "npx hardhat test",
+      "deploy:testnet": "npx hardhat run scripts/deploy.ts --network vechain_testnet",
+      "deploy:mainnet": "npx hardhat run scripts/deploy.ts --network vechain_mainnet",
+      "deploy:solo": "npx hardhat run scripts/deploy.ts --network vechain_solo",
+      "test:delegation": "npx hardhat run scripts/test-fee-delegation.ts --network vechain_testnet",
+      "test:bridge": "npx hardhat run scripts/test-bridge-flow.ts --network vechain_testnet"
+    },
+    "keywords": [
+      "vechain",
+      "carbon-credit",
+      "nft",
+      "blockchain",
+      "sustainability",
+      "hackathon"
+    ],
+    "author": "VeChain Builders Hackathon Team",
+    "license": "MIT",
+    "dependencies": {
+      "@openzeppelin/contracts": "^5.0.2",
+      "@vechain/sdk-core": "^1.0.0",
+      "@vechain/sdk-network": "^1.0.0",
+      "@vechain/connex": "^2.0.0",
+      "axios": "^1.6.0",
+      "form-data": "^4.0.0"
+    },
+    "devDependencies": {
+      "hardhat": "^2.26.0",
+      "@vechain/sdk-hardhat-plugin": "^1.0.0",
+      "@nomicfoundation/hardhat-toolbox": "^4.0.0",
+      "@typechain/hardhat": "^9.0.0",
+      "typescript": "^5.0.0",
+      "ts-node": "^10.9.0",
+      "@types/node": "^20.0.0",
+      "chai": "^4.3.0",
+      "@types/chai": "^4.3.0",
+      "ethers": "^6.0.0",
+      "dotenv": "^17.2.3"
+    },
+    "engines": {
+      "node": ">=20.0.0"
+    }
+  }
