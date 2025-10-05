@@ -1,13 +1,13 @@
 'use client';
 
-import { Button } from "../../components/ui/button";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../../components/ui/card";
-import { Input } from "../../components/ui/input";
-import { Label } from "../../components/ui/label";
-import { Textarea } from "../../components/ui/textarea";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../../components/ui/select";
+import { Button } from "../components/ui/button";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../components/ui/card";
+import { Input } from "../components/ui/input";
+import { Label } from "../components/ui/label";
+import { Textarea } from "../components/ui/textarea";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../components/ui/select";
 import { UploadCloud, Leaf } from "lucide-react";
-import Particles from '../../components/Particles';
+import Particles from '../components/Particles';
 
 export default function QualifyPage() {
   // In a real app, you'd handle form state with useState and submission logic here
@@ -18,7 +18,7 @@ export default function QualifyPage() {
   };
 
   return (
-    <div className="">
+    <div className="mt-20">
         <div className="absolute inset-0 -z-1" style={{ width: '100%', height: '100%' }}>
             <Particles
                 particleColors={['#0CDF2F', '#0CDF2F']}

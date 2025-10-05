@@ -1,4 +1,4 @@
-import LiquidEther from '../../components/LiquidEther';
+import LiquidEther from '../components/LiquidEther';
 export const Herosection = () => (
     <section id="hero" className="h-[89vh] flex items-center justify-center text-center px-4">
         <div className='absolute inset-0 z-0' style={{ width: '100%', height: '100%', }}>

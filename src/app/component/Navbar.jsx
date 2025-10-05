@@ -1,44 +1,67 @@
-// src/app/component/Navbar.js
+'use client';
 
-"use client"; // This component uses hooks, so it must be a client component
-
-import { useConnectModal } from '@rainbow-me/rainbowkit';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useAccount } from 'wagmi';
 
-// You still need the full ConnectButton for the connected state UI
-import { ConnectButton } from '@rainbow-me/rainbowkit';
+// NavLink Component to handle active states
+const NavLink = ({ href, children }) => {
+  const pathname = usePathname();
+  const isActive = pathname === href;
 
-export const Navbar = () => {
-    // Hook to get the function that opens the wallet connection modal
-    const { openConnectModal } = useConnectModal();
-
-    // Hook to check if a wallet is connected
-    const { isConnected } = useAccount();
-
-    return (
-        <header className="fixed top-0 left-0 right-0 z-50 p-4">
-            <nav className="container mx-auto flex justify-between items-center glass-card rounded-xl p-3">
-                <h1 className="text-xl text-slate-50 font-bold">CarbonChain Collective</h1>
-                <div className='flex gap-5 items-center'>
-                    <a href="/qualify" className="hidden sm:inline-block border-1 p-1.5 rounded-md text-slate-300 hover:text-white transition-colors">
-                        Become a Generator
-                    </a>
-                    {!isConnected && openConnectModal ? (
-                        <button
-                            onClick={openConnectModal}
-                            type="button"
-                            className="bg-green-500 cursor-pointer hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg transition-all duration-300 shadow-lg shadow-green-500/20"
-                        >
-                            Connect Wallet
-                        </button>
-                    ) : (
-                        // This will render RainbowKit's default UI for the connected state 
-                        // (address, balance, disconnect button, etc.)
-                        // It's the easiest way to handle the "connected" view.
-                        <ConnectButton />
-                    )}
-                </div>
-            </nav>
-        </header>
-    );
+  return (
+    <Link href={href} className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+        isActive 
+          ? 'text-white bg-slate-700/50' 
+          : 'text-slate-400 hover:text-white hover:bg-slate-800/50'
+      }`}
+    >
+      {children}
+    </Link>
+  );
 };
+
+
+export default function Navbar() {
+  const { isConnected } = useAccount();
+
+  return (
+    <header className="fixed top-0 left-0 right-0 z-50 p-4">
+      <nav className="container mx-auto flex justify-between items-center glass-card rounded-xl p-3">
+        <Link href="/" className="text-xl font-bold text-white">
+          CarbonChain Collective
+        </Link>
+        <div className="hidden md:flex items-center gap-2">
+          <NavLink href="/qualify">Become a Generator</NavLink>
+          <NavLink href="/alliance">Alliances</NavLink>
+          <NavLink href="/dashboard">Dashboard</NavLink>
+          <NavLink href="/marketplace">Marketplace</NavLink>
+        </div>
+        <div>
+          <ConnectButton.Custom>
+            {({ openConnectModal }) => {
+              // If the user is already connected, we show the default RainbowKit button.
+              // It perfectly handles showing the address, disconnecting, and switching networks.
+              if (isConnected) {
+                return <ConnectButton />;
+              }
+
+              // If the user is not connected, we show your custom-styled button.
+              return (
+                <button
+                  onClick={openConnectModal}
+                  type="button"
+                  className="bg-green-500 cursor-pointer hover:bg-green-600 shadow-lg shadow-green-500/20 text-white font-bold py-2 px-4 rounded-lg transition-all duration-300"
+                >
+                  Connect Wallet
+                </button>
+              );
+            }}
+          </ConnectButton.Custom>
+        </div>
+      </nav>
+    </header>
+  );
+}
+
